@@ -113,7 +113,7 @@ java {
 
 tasks.processResources {
     val props = mapOf(
-        "name" to project.name,
+        "name" to "leaf-${project.name}",
         "version" to project.version,
         "loader_version" to libs.versions.leaf.loader.get(),
         "zomboid_version" to libs.versions.zomboid.get(),
