@@ -29,7 +29,8 @@ import zombie.debug.DebugLog;
 
 public class Main implements ModInitializer, InitExtension {
     @Override
-    public void onInitialize() {}
+    public void onInitialize() {
+    }
 
     @Override
     public void onLuaInitialize() {
