@@ -23,6 +23,8 @@
 
 package dev.aoqia.leaf.api;
 
+import zombie.Lua.LuaEventManager;
+
 public enum Events {
     CLIENT_CONNECT("OnClientConnect"),
     CLIENT_DISCONNECT("OnClientDisconnect"),
@@ -32,7 +34,13 @@ public enum Events {
     private final String name;
 
     Events(String name) {
-        this.name = name;
+        this.name = Main.MOD_ID + ":" + name;
+    }
+
+    public static void register() {
+        for (var e : values()) {
+            LuaEventManager.AddEvent(e.name());
+        }
     }
 
     @Override

@@ -26,17 +26,18 @@ package dev.aoqia.leaf.api;
 import dev.aoqia.leaf.api.extensions.InitExtension;
 
 import zombie.debug.DebugLog;
+import zombie.debug.DebugType;
 
 public class Main implements ModInitializer, InitExtension {
+    static final String MOD_ID = "leaf-api";
+
     @Override
     public void onInitialize() {
     }
 
     @Override
     public void onLuaInitialize() {
-        for (var e : Events.values()) {
-            LuaEventManager.AddEvent(e.name());
-        }
-        DebugLog.log("Added leaf-api events");
+        Events.register();
+        DebugLog.log(DebugType.Mod, "Added leaf-api events");
     }
 }
