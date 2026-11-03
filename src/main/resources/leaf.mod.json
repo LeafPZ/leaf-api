@@ -1,6 +1,6 @@
 {
     "schemaVersion": 1,
-    "id": "leafapi",
+    "id": "${name}",
     "version": "${version}",
     "name": "Leaf API",
     "description": "go brr",
@@ -8,23 +8,22 @@
         "aoqia"
     ],
     "contact": {
-        "sources": "https://github.com/aoqia194/leaf-api"
+        "sources": "https://github.com/LeafPZ/${name}"
     },
-    "license": "GPLv3",
-    "icon": "assets/leafapi/icon.png",
+    "license": "AGPL-3.0-or-later",
+    "icon": "assets/${name}/icon.png",
     "environment": "*",
     "entrypoints": {
         "main": [
-            "dev.aoqia.leaf.api.LeafApi"
+            "dev.aoqia.leaf.api.Main"
         ]
     },
     "mixins": [
-        "leafapi.mixins.json"
+        "${name}.mixins.json"
     ],
     "depends": {
-        "leafloader": ">=${loader_version}",
-        "zomboid": "~${zomboid_version}",
-        "java": "~17"
-    },
-    "suggests": {}
+        "leaf-loader": ">=${loader_version}",
+        "zomboid": "^${zomboid_version}",
+        "java": ">=25"
+    }
 }

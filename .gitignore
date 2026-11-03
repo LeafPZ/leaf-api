@@ -1,40 +1,23 @@
-# gradle
+/*
 
-.gradle/
-build/
-out/
-classes/
+!/.github
+!/gradle
+!/src
 
-# eclipse
-
-*.launch
-
-# idea
-
-.idea/
-*.iml
-*.ipr
-*.iws
-
-# vscode
-
-.settings/
-.vscode/
-bin/
-.classpath
-.project
-
-# macos
-
-*.DS_Store
-
-# fabric
-
-run/
-
-# java
-
-hs_err_*.log
-replay_*.log
-*.hprof
-*.jfr
+!/.cliff.toml
+!/.editorconfig
+!/.gitattributes
+!/.gitignore
+!/AGENTS.md
+!/build.gradle.kts
+!/checkstyle.xml
+!/CLAUDE.md
+!/eclipse-formatter.xml
+!/gradle.properties
+!/gradlew
+!/gradlew.bat
+!/HEADER
+!/LICENSE
+!/LICENSE_EXCEPTION.md
+!/README.md
+!/settings.gradle.kts

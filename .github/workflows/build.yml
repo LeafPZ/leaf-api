@@ -1,37 +1,60 @@
-# Automatically build the project and run any configured tests for every push
-# and submitted pull request. This can help catch issues that only occur on
-# certain platforms or Java versions, and provides a first line of defence
-# against bad commits.
+name: Build
 
-name: build
-on: [pull_request, push]
+on:
+  push:
+    # ignoring tags also ignores branches
+    tags-ignore:
+      - '**'
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - 'main'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build:
-    # Remove in production. This is needed in template because I don't have a self-hosted runner available to compile game sources.
-    if: false
+  check-changes:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      build: ${{ steps.filter.outputs.build }}
+      code: ${{ steps.filter.outputs.code }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v2
-
-      - name: Setup JDK
-        uses: actions/setup-java@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4
+        id: filter
         with:
-          java-version: 17
+          filters: |
+            build:
+              - 'buildSrc/**'
+              - 'gradle/**'
+              - '*.gradle.kts'
+              - 'gradle.properties'
+            code:
+              - 'src/**'
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: check-changes
+    if: ${{ needs.check-changes.outputs.build == 'true' || needs.check-changes.outputs.code == 'true' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Setup Java
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6
+        with:
+          java-version: 25
           distribution: temurin
-
-      - name: Make Gradle Wrapper Executable
-        run: chmod +x ./gradlew
-
+          cache: gradle
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6
       - name: Build
         run: ./gradlew build -S
-
-      - name: Capture Build Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: Artifacts
-          path: build/libs/
