@@ -21,3 +21,4 @@
 !/LICENSE_EXCEPTION.md
 !/README.md
 !/settings.gradle.kts
+!/shell.nix

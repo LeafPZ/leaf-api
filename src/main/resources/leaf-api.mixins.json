@@ -1,12 +1,19 @@
 {
-	"required": true,
-	"package": "dev.aoqia.leaf.api.mixin",
-	"compatibilityLevel": "JAVA_25",
-	"mixins": [
+    "required": true,
+    "package": "dev.aoqia.leaf.api.mixin",
+    "compatibilityLevel": "JAVA_25",
+    "mixins": [
+        "BodyDamageMixin",
+        "BodyPartMixin",
+        "GameServerMixin",
+        "InventoryItemMixin",
+        "LuaEventManagerAccessor",
+        "LuaEventManagerMixin",
         "LuaManagerMixin",
-        "SandboxOptionsMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
+        "SandboxOptionsMixin",
+        "VehiclePartMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
 	}
 }

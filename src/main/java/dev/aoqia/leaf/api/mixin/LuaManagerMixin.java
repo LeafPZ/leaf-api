@@ -28,19 +28,23 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import dev.aoqia.leaf.api.extensions.InitExtension;
+import dev.aoqia.leaf.api.ClientModInitializer;
+import dev.aoqia.leaf.api.ModInitializer;
+import dev.aoqia.leaf.api.ServerModInitializer;
+import dev.aoqia.leaf.api.extensions.ExtensionHelper;
 import dev.aoqia.leaf.loader.api.LeafLoader;
 
 import zombie.Lua.LuaManager;
 
+@SuppressWarnings({ "UnusedMethod", "UnusedVariable" })
 @Mixin(LuaManager.class)
 public class LuaManagerMixin {
     @Inject(method = "init", at = @At("TAIL"))
     private static void init(CallbackInfo ci) {
         final var loader = LeafLoader.getInstance();
 
-        loader.getEntrypoints("main", InitExtension.class).forEach(InitExtension::onLuaInitialize);
-        loader.getEntrypoints("client", InitExtension.class).forEach(InitExtension::onLuaInitialize);
-        loader.getEntrypoints("server", InitExtension.class).forEach(InitExtension::onLuaInitialize);
+        loader.getEntrypoints("main", ModInitializer.class).forEach(ExtensionHelper::tryRunWithEntrypoint);
+        loader.getEntrypoints("client", ClientModInitializer.class).forEach(ExtensionHelper::tryRunWithEntrypoint);
+        loader.getEntrypoints("server", ServerModInitializer.class).forEach(ExtensionHelper::tryRunWithEntrypoint);
     }
 }

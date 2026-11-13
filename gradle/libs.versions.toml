@@ -2,11 +2,11 @@
 
 errorprone = "2.51.0"
 jspecify = "1.0.1"
-leaf-loader = "2.0.0"
-leaf-loom = "1.0.0"
+leaf-loader = "2.0.2"
+leaf-loom = "1.1.2"
 nullaway = "0.14.3"
 spotless = "8.10.4"
-zomboid = "42.21.0"
+zomboid = "42.22.2"
 
 [libraries]
 

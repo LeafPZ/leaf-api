@@ -28,20 +28,21 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import dev.aoqia.leaf.api.Events;
+import dev.aoqia.leaf.api.events.PostSandboxOptionsLoadEvent;
+import dev.aoqia.leaf.api.events.PreSandboxOptionsLoadEvent;
 
-import zombie.Lua.LuaEventManager;
 import zombie.SandboxOptions;
 
+@SuppressWarnings({ "UnusedMethod", "UnusedVariable" })
 @Mixin(SandboxOptions.class)
 public class SandboxOptionsMixin {
     @Inject(method = "load()V", at = @At("TAIL"))
     private void postLoad(CallbackInfo ci) {
-        LuaEventManager.triggerEvent(Events.POST_SANDBOX_OPTIONS_LOAD.name());
+        PostSandboxOptionsLoadEvent.trigger();
     }
 
     @Inject(method = "load()V", at = @At("HEAD"))
     private void preLoad(CallbackInfo ci) {
-        LuaEventManager.triggerEvent(Events.PRE_SANDBOX_OPTIONS_LOAD.name());
+        PreSandboxOptionsLoadEvent.trigger();
     }
 }

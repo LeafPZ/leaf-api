@@ -23,6 +23,8 @@
 
 package dev.aoqia.leaf.api.extensions;
 
+/// Extends a mod's entrypoint class by providing extra initializer methods.
 public interface InitExtension {
+    /// Runs when Lua has been initialized.
     void onLuaInitialize();
 }

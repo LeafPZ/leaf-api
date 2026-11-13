@@ -23,21 +23,27 @@
 
 package dev.aoqia.leaf.api;
 
-import dev.aoqia.leaf.api.extensions.InitExtension;
+import dev.aoqia.leaf.api.events.CharacterDamageEvent;
+import dev.aoqia.leaf.api.game.PowerApi;
+import dev.aoqia.leaf.api.lua.ExposerApi;
+import dev.aoqia.leaf.loader.impl.LeafLoaderImpl;
 
-import zombie.debug.DebugLog;
 import zombie.debug.DebugType;
 
-public class Main implements ModInitializer, InitExtension {
-    static final String MOD_ID = "leaf-api";
+public class Main implements ModInitializer {
+    public static final boolean IS_DEVELOPMENT = LeafLoaderImpl.INSTANCE.isDevelopmentEnvironment();
+    public static final String MOD_ID = "leaf-api";
 
     @Override
     public void onInitialize() {
+        CharacterDamageEvent.EVENT.register(character -> {
+            DebugType.Mod.println("Character '%s' was damaged :c".formatted(character.getFullName()));
+        });
+
+        exposeClasses();
     }
 
-    @Override
-    public void onLuaInitialize() {
-        Events.register();
-        DebugLog.log(DebugType.Mod, "Added leaf-api events");
+    private void exposeClasses() {
+        ExposerApi.exposeClass(PowerApi.class);
     }
 }

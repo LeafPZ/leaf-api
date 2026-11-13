@@ -9,7 +9,7 @@
 </h1>
 
 ![License](https://img.shields.io/github/license/LeafPZ/leaf-api?label=License)
-![Gradle version](https://img.shields.io/badge/Gradle-9.8.1-teal?logo=gradle)
+![Gradle version](https://img.shields.io/badge/Gradle-9.8.2-teal?logo=gradle)
 ![Build status](https://github.com/LeafPZ/leaf-api/actions/workflows/build.yml/badge.svg?branch=main&label=build)
 ![Code Size](https://img.shields.io/github/languages/code-size/LeafPZ/leaf-api?label=Code%20Size)
 

@@ -21,30 +21,11 @@
 
 // checkstyle:on
 
-package dev.aoqia.leaf.api;
+package dev.aoqia.leaf.api.game;
 
-import zombie.Lua.LuaEventManager;
-
-public enum Events {
-    CLIENT_CONNECT("OnClientConnect"),
-    CLIENT_DISCONNECT("OnClientDisconnect"),
-    PRE_SANDBOX_OPTIONS_LOAD("OnPreSandboxOptionsLoad"),
-    POST_SANDBOX_OPTIONS_LOAD("OnPostSandboxOptionsLoad");
-
-    private final String name;
-
-    Events(String name) {
-        this.name = Main.MOD_ID + ":" + name;
-    }
-
-    public static void register() {
-        for (var e : values()) {
-            LuaEventManager.AddEvent(e.name());
-        }
-    }
-
-    @Override
-    public String toString() {
-        return name;
-    }
+// TODO: Implement
+//   - Add a new powered object
+//   - Change power consumption of a powered object
+// @UsedFromLua
+public class PowerApi {
 }

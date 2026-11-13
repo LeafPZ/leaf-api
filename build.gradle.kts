@@ -1,7 +1,6 @@
-import java.nio.charset.Charset
-
 import com.diffplug.spotless.LineEnding
 import net.ltgt.gradle.errorprone.errorprone
+import java.nio.charset.Charset
 
 val isCiBuild = providers.environmentVariable("CI").map { it.toBoolean() }.orElse(false).get()
 val isSnapshot = providers.gradleProperty("isSnapshot").map { it.toBoolean() }.orElse(false).get()
@@ -32,9 +31,11 @@ loom {
     // Decompiles only the zombie classes instead of every file.
     decompilers {
         getByName("vineflower") {
-            options.putAll(mapOf(
-                "included-classes" to "zombie.*",
-            ))
+            options.putAll(
+                mapOf(
+                    "included-classes" to "zombie.*",
+                )
+            )
         }
     }
 
@@ -47,6 +48,7 @@ loom {
     runs {
         named("client") {
             programArguments.addAll(listOf("-debug"))
+            hotswapClasses = true
         }
     }
 }

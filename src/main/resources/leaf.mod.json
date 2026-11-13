@@ -3,9 +3,9 @@
     "id": "${name}",
     "version": "${version}",
     "name": "Leaf API",
-    "description": "go brr",
+    "description": "The official Leaf API.",
     "authors": [
-        "aoqia"
+        "aoqia", "LeafPZ"
     ],
     "contact": {
         "sources": "https://github.com/LeafPZ/${name}"
@@ -23,7 +23,7 @@
     ],
     "depends": {
         "leaf-loader": ">=${loader_version}",
-        "zomboid": "^${zomboid_version}",
+        "zomboid": ">=${zomboid_version}",
         "java": ">=25"
     }
 }
